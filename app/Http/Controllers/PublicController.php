@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    public function index(Request $request) {
-        $perPage = 16;
-        $page = $request->query('page');
-        // 1 => 0 ; 2 => 16 ; 3 => 32 ; 4 => 48; => 5 => 64
-        $skip = ($page - 1) * $perPage;
-        $posts = Post::take($perPage)->skip($skip)->get();
+    public function index() {
+        $posts = Post::paginate(16);
         return view('welcome', compact('posts'));
     }
 
