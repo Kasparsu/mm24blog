@@ -5,3 +5,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'index']);
 Route::get('/buttons', [PublicController::class, 'buttons']);
+Route::get('/post/{post}', [PublicController::class, 'post']);
