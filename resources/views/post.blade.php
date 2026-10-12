@@ -7,7 +7,7 @@
                     </figure> --}}
             <div class="card-body">
                 <h2 class="card-title">{{ $post->title }}</h2>
-                <p>{{ $post->body }}</p>
+                <p>{!! $post->displayBody !!}</p>
                 <div class="card-actions justify-end">
                     
                 </div>
