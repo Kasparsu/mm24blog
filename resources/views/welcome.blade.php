@@ -1,7 +1,7 @@
 @extends('partials.layout')
 @section('content')
     <div class="container mx-auto">
-        <h1>Home page</h1>
+        <h1>{{ __('Home Page') }}</h1>
         {{ $posts->links() }}
         <div class="grid grid-cols-4 gap-2">
             @foreach ($posts as $post)
@@ -13,7 +13,7 @@
                         <h2 class="card-title">{{ $post->title }}</h2>
                         <p>{{ $post->snippet }}</p>
                         <div class="card-actions justify-end">
-                            <a href="/post/{{ $post->id }}" class="btn btn-primary">Read more</a>
+                            <a href="{{ route('post', $post) }}" class="btn btn-primary">@lang('Read more')</a>
                         </div>
                     </div>
                 </div>
