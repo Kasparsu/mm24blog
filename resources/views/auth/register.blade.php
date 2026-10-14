@@ -1,52 +1,56 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+@extends('partials.layout')
+@section('content')
+<div class="container mx-auto">
+    
+    <form method="POST" action="{{ route('register') }}" class="card bg-base-300 shadow-sm w-2/3 mx-auto p-3">
         @csrf
-
+        
         <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+        <fieldset class="fieldset">
+                <legend class="fieldset-legend">@lang('Name')</legend>
+                <input name="name" value="{{ old('name') }}" type="text" class="input w-full @error('name') input-error @enderror" required autofocus autocomplete="name" />
+                @error('name')
+                    <p class="label text-error">{{$message}}</p>
+                @enderror
+        </fieldset>
+        
 
         <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <fieldset class="fieldset">
+                <legend class="fieldset-legend">@lang('Email')</legend>
+                <input name="email" value="{{ old('email') }}" type="email" class="input w-full @error('email') input-error @enderror" required autocomplete="username" />
+                @error('email')
+                    <p class="label text-error">{{$message}}</p>
+                @enderror
+        </fieldset>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
+        <fieldset class="fieldset">
+                <legend class="fieldset-legend">@lang('Password')</legend>
+                <input name="password" type="password" class="input w-full @error('password') input-error @enderror" required autocomplete="new-password" />
+                @error('password')
+                    <p class="label text-error">{{$message}}</p>
+                @enderror
+        </fieldset>
+      
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
+        <fieldset class="fieldset">
+                <legend class="fieldset-legend">@lang('Confirm Password')</legend>
+                <input name="password_confirmation" type="password" class="input w-full @error('password_confirmation') input-error @enderror" required autocomplete="new-password" />
+                @error('password_confirmation')
+                    <p class="label text-error">{{$message}}</p>
+                @enderror
+        </fieldset>
+       
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+            <a class="btn btn-link" href="{{ route('login') }}">
+                @lang('Already registered?')
             </a>
 
-            <x-primary-button class="ms-4">
+            <button class="btn btn-primary">
                 {{ __('Register') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
-</x-guest-layout>
+</div>
+@endsection

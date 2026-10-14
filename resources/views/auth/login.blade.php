@@ -1,47 +1,52 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('partials.layout')
+@section('content')
+    <div class="container mx-auto">
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+        <form method="POST" action="{{ route('login') }}" class="card bg-base-300 shadow-sm w-2/3 mx-auto p-3">
+            @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <!-- Email Address -->
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">@lang('Email')</legend>
+                <input name="email" value="{{ old('email') }}" type="email"
+                    class="input w-full @error('email') input-error @enderror" required autocomplete="username" />
+                @error('email')
+                    <p class="label text-error">{{ $message }}</p>
+                @enderror
+            </fieldset>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <!-- Password -->
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">@lang('Password')</legend>
+                <input name="password" type="password" class="input w-full @error('password') input-error @enderror"
+                    required autocomplete="current-password" />
+                @error('password')
+                    <p class="label text-error">{{ $message }}</p>
+                @enderror
+            </fieldset>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <!-- Remember Me -->
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Login options</legend>
+                <label class="label">
+                    <input name="remember" type="checkbox" checked="checked" class="checkbox" />
+                    @lang('Remember me')
+                </label>
+            </fieldset>
+            <div class="flex items-center justify-end mt-4">
+                @if (Route::has('password.request'))
+                    <a class="btn btn-link"
+                        href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+                <button class="btn btn-primary">
+                    {{ __('Log in') }}
+                </button>
+            </div>
+        </form>
+    </div>
+@endsection
