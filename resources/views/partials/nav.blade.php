@@ -37,7 +37,24 @@
         </ul>
     </div>
     <div class="navbar-end gap-2">
-        <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
-        <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
+        @auth
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn m-1">{{ auth()->user()->name }}</div>
+                <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button>Logout</button>
+                        </form>
+                    </li>
+
+                </ul>
+            </div>
+        @else
+            <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
+            <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
+        @endauth
+
     </div>
 </div>
