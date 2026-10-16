@@ -12,6 +12,7 @@
                     <div class="card-body">
                         <h2 class="card-title">{{ $post->title }}</h2>
                         <p>{{ $post->snippet }}</p>
+                        <span class="text-base-content/70">{{ $post->user->name }}</span>
                         <div class="card-actions justify-end">
                             <a href="{{ route('post', $post) }}" class="btn btn-primary">@lang('Read more')</a>
                         </div>
