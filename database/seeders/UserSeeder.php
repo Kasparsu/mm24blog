@@ -15,11 +15,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => env('DEFAULT_USER_NAME', 'User McUserface'),
-            'email' => env('DEFAULT_USER_EMAIL', 'user@user.user'),
-            'password' => env('DEFAULT_USER_PASSWORD_HASH', Hash::make('password')),
-        ]);
+        $defaultUserEmail = env('DEFAULT_USER_EMAIL', 'user@user.user');
+        if(!User::where('email', $defaultUserEmail)->exists()) {
+            User::factory()->create([
+                'name' => env('DEFAULT_USER_NAME', 'User McUserface'),
+                'email' => $defaultUserEmail,
+                'password' => env('DEFAULT_USER_PASSWORD_HASH', Hash::make('password')),
+            ]);
+        }
     }
 }
