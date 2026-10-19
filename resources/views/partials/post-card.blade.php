@@ -1,7 +1,9 @@
  <div class="card bg-base-300 shadow-sm">
-     {{-- <figure>
-                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
-                    </figure> --}}
+    @if($post->image_path)
+     <figure>
+        <img src="{{ $post->image_path }}" />
+    </figure>
+    @endif
      <div class="card-body">
          <h2 class="card-title">{{ $post->title }}</h2>
          @isset($posts)
