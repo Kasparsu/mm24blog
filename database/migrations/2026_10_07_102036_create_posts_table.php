@@ -19,7 +19,6 @@ return new class extends Migration
             // $table->unsignedBigInteger('user_id');
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('image_path')->nullable();
             $table->timestamps();
 
         });

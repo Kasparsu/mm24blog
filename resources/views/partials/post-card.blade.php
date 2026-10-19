@@ -1,7 +1,7 @@
  <div class="card bg-base-300 shadow-sm">
-    @if($post->image_path)
+    @if($post->image)
      <figure>
-        <img src="{{ $post->image_path }}" />
+        <img src="{{ $post->image->path }}" />
     </figure>
     @endif
      <div class="card-body">
