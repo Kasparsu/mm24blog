@@ -37,6 +37,7 @@ class PostController extends Controller
         $post = new Post($request->validated());
         // $post->title = $request->input('title');
         // $post->body = $request->input('body');
+        $post->user()->associate(Auth::user());
         $post->save();
         return redirect()->route('posts.index');
     }
