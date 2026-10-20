@@ -16,9 +16,7 @@ class ImageSeeder extends Seeder
     {
         $posts = Post::select('id')->get();
         foreach($posts as $post) {
-            if(rand(0, 9)) {
-                Image::factory()->create(['post_id' => $post->id]);
-            }
+            Image::factory(rand(0,5))->create(['post_id' => $post->id]);
         }
     }
 }
