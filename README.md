@@ -8,7 +8,8 @@
 8. create .env file from .env.example
 9. `php artisan key:generate`
 10. `php artisan migrate` (yes)
-11. run laravel `composer run dev`
+11. `php artisan storage:link`
+12. run laravel `composer run dev`
 
 ```
 composer run dev
