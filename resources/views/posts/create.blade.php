@@ -29,15 +29,14 @@
                     <p class="label text-error">{{ $message }}</p>
                 @enderror
             </fieldset>
-            {{-- borked daisyUI doesnt have multiple select --}}
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Tags</legend>
-                <select multiple class="select">
-                    <option disabled selected>Pick a browser</option>
-                    @foreach($tags as $tag)
-                        <option>{{ $tag->name }}</option>
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($tags as $tag)
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" aria-label="{{ $tag->name }}"
+                            class="btn btn-sm" @checked(in_array($tag->id, old('tags', []))) />
                     @endforeach
-                </select>
+                </div>
                 <span class="label">Optional</span>
             </fieldset>
             <button class="btn btn-primary">Create</button>

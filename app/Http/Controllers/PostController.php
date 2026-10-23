@@ -42,7 +42,7 @@ class PostController extends Controller
         // $post->body = $request->input('body');
         $post->user()->associate(Auth::user());
         $post->save();
-        foreach($request->file('images') as $file) {
+        foreach($request->file('images') ?? [] as $file) {
             $image = $file->store('', ['disk' => 'public']);
             $url = Storage::url($image);
 
@@ -51,6 +51,7 @@ class PostController extends Controller
             $image->post()->associate($post);
             $image->save();
         }
+        $post->tags()->attach($request->input('tags'));
         return redirect()->route('posts.index');
     }
 
