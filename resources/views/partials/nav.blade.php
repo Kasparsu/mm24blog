@@ -18,6 +18,7 @@
                         </ul>
                     </li>
                 @endauth
+
                 <li><a>Item 3</a></li>
             </ul>
         </div>
@@ -37,6 +38,18 @@
                     </details>
                 </li>
             @endauth
+            @foreach(App\Models\Category::where('parent_id', null)->get() as $category)
+                <li>
+                    <details>
+                        <summary>{{$category->name}}</summary>
+                        <ul class="p-2 bg-base-100 w-40 z-1">
+                            @foreach($category->children as $category)
+                                <li><a>{{ $category->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </details>
+                </li>
+            @endforeach
             <li><a>Item 3</a></li>
         </ul>
     </div>
