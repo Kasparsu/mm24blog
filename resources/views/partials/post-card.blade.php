@@ -26,7 +26,7 @@
          </span>
          <span class="text-base-content/70">{{ $post->created_at->diffForHumans() }}</span>
          <span class="text-base-content/70"><b>Comments:</b> {{ $post->comments_count }}</span>
-         <div>
+         <div class="flex flex-wrap gap-1">
              @foreach ($post->tags as $tag)
                  <div class="badge badge-outline badge-primary">{{ $tag->name }}</div>
              @endforeach
