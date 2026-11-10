@@ -28,6 +28,7 @@
         <ul class="menu menu-horizontal px-1">
             <li><a href="{{ route('buttons') }}">Buttons</a></li>
             @auth
+                <li><a href="{{ route('feed') }}">Feed</a></li>
                 <li>
                     <details>
                         <summary>Admin</summary>

@@ -9,6 +9,8 @@ Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/buttons', [PublicController::class, 'buttons'])->name('buttons');
 Route::get('/post/{post}', [PublicController::class, 'post'])->name('post');
 Route::get('/user/{user}', [PublicController::class, 'user'])->name('user');
+Route::post('/user/{user}', [PublicController::class, 'follow'])->name('follow')->middleware('auth');
+Route::get('/feed', [PublicController::class, 'feed'])->name('feed')->middleware('auth');
 
 Route::get('/secure', [PublicController::class, 'index'])->name('secure')->middleware(['auth', 'password.confirm']);
 
