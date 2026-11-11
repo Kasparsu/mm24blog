@@ -71,4 +71,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $followeeIds = $this->followees()->select('id')->get()->pluck('id');
         return Post::whereIn('user_id', $followeeIds);
     }
+
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
 }
