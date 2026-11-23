@@ -12,8 +12,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PublicController extends Controller
 {
     public function index() {
-        $posts = Post::with('images', 'user', 'tags')->withCount('comments', 'likes')->latest()->simplePaginate(16);
-        return view('welcome', compact('posts'));
+        $posts = Post::with('images', 'user', 'tags')->withCount('comments', 'likes')->latest()->paginate(16);
+        if(request()->acceptsHtml()){
+            return view('welcome', compact('posts'));
+        }
+        return $posts;
     }
 
     public function user(User $user) {
